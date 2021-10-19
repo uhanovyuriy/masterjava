@@ -1,8 +1,7 @@
 package ru.javaops.masterjava.matrix;
 
-import java.util.Random;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
+import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * gkislin
@@ -14,6 +13,44 @@ public class MatrixUtil {
     public static int[][] concurrentMultiply(int[][] matrixA, int[][] matrixB, ExecutorService executor) throws InterruptedException, ExecutionException {
         final int matrixSize = matrixA.length;
         final int[][] matrixC = new int[matrixSize][matrixSize];
+        final int[][] tMatrixB = getTMatrix(matrixB, matrixSize);
+
+        final CompletionService<List<Integer[]>> completionService = new ExecutorCompletionService<>(executor);
+        final List<Future<List<Integer[]>>> futures = new ArrayList<>();
+
+        for (int i = 0; i < matrixSize; i++) {
+            final int rowNum = i;
+            final Future<List<Integer[]>> future = completionService.submit(() -> {
+                final List<Integer[]> list = new ArrayList<>();
+                for (int j = 0; j < matrixSize; j++) {
+                    final Integer[] row = new Integer[3];
+                    int sum = 0;
+                    for (int k = 0; k < matrixSize; k++) {
+                        sum += matrixA[rowNum][k] * tMatrixB[j][k];
+                    }
+                    row[0] = rowNum;
+                    row[1] = j;
+                    row[2] = sum;
+                    list.add(row);
+                }
+
+                return list;
+            });
+
+            futures.add(future);
+        }
+
+        while(!futures.isEmpty()) {
+            Future<List<Integer[]>> future = completionService.poll(5, TimeUnit.SECONDS);
+            if (future == null) {
+                System.out.println("Alarm, future = null!!!");
+                return matrixC;
+            }
+
+            future.get().forEach(arr -> matrixC[arr[0]][arr[1]] = arr[2]);
+
+            futures.remove(future);
+        }
 
         return matrixC;
     }
@@ -22,17 +59,28 @@ public class MatrixUtil {
     public static int[][] singleThreadMultiply(int[][] matrixA, int[][] matrixB) {
         final int matrixSize = matrixA.length;
         final int[][] matrixC = new int[matrixSize][matrixSize];
+        final int[][] tMatrixB = getTMatrix(matrixB, matrixSize);
 
         for (int i = 0; i < matrixSize; i++) {
             for (int j = 0; j < matrixSize; j++) {
                 int sum = 0;
                 for (int k = 0; k < matrixSize; k++) {
-                    sum += matrixA[i][k] * matrixB[k][j];
+                    sum += matrixA[i][k] * tMatrixB[j][k];
                 }
                 matrixC[i][j] = sum;
             }
         }
         return matrixC;
+    }
+
+    public static int[][] getTMatrix(final int[][] matrix, final int matrixSize) {
+        final int[][] tMatrix = new int[matrixSize][matrixSize];
+        for (int i = 0; i < matrixSize; i++) {
+            for (int j = 0; j < matrixSize; j++) {
+                tMatrix[j][i] = matrix[i][j];
+            }
+        }
+        return tMatrix;
     }
 
     public static int[][] create(int size) {
