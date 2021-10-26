@@ -1,0 +1,62 @@
+<Payload xmlns="http://javaops.ru"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://javaops.ru payload.xsd">
+    <Projects>
+        <Project projectName="tj">
+            <description>Top Java Project</description>
+            <Groups>
+                <Group groupName="tj1" type="REGISTERING">
+                    <Users>
+                        <User fullName="Full Name" email="gmail@gmail.com" flag="active" city="kiv"/>
+                    </Users>
+                </Group>
+                <Group groupName="tj2" type="CURRENT">
+                    <Users>
+                        <User fullName="Deleted" email="mail@yandex.ru" flag="deleted" city="spb"/>
+                    </Users>
+                </Group>
+                <Group groupName="mj1" type="FINISHED">
+                    <Users>
+                        <User fullName="Admin" email="admin@javaops.ru" flag="superuser" city="spb"/>
+                    </Users>
+                </Group>
+            </Groups>
+        </Project>
+    </Projects>
+    <Groups>
+        <Group groupName="tj1" type="REGISTERING">
+            <Users>
+                <User fullName="Full Name" email="gmail@gmail.com" flag="active" city="kiv"/>
+            </Users>
+        </Group>
+        <Group groupName="tj2" type="CURRENT">
+            <Users>
+                <User fullName="Deleted" email="mail@yandex.ru" flag="deleted" city="spb"/>
+            </Users>
+        </Group>
+        <Group groupName="mj1" type="FINISHED">
+            <Users>
+                <User fullName="Admin" email="admin@javaops.ru" flag="superuser" city="spb"/>
+            </Users>
+        </Group>
+    </Groups>
+    <ProjectNames>
+        <ProjectName id="tj">topJava</ProjectName>
+        <ProjectName id="mj">masterJava</ProjectName>
+    </ProjectNames>
+    <GroupNames>
+        <GroupName id="tj1">topJava1</GroupName>
+        <GroupName id="tj2">topJava2</GroupName>
+        <GroupName id="mj1">masterJava1</GroupName>
+    </GroupNames>
+    <Users>
+        <User fullName="Full Name" email="gmail@gmail.com" flag="active" city="kiv"/>
+        <User fullName="Admin" email="admin@javaops.ru" flag="superuser" city="spb"/>
+        <User fullName="Deleted" email="mail@yandex.ru" flag="deleted" city="spb"/>
+    </Users>
+    <Cities>
+        <City id="spb">Санкт-Петербург</City>
+        <City id="kiv">Киев</City>
+        <City id="mnsk">Минск</City>
+    </Cities>
+</Payload>
