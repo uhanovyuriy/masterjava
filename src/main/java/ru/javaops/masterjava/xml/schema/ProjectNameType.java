@@ -7,12 +7,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for cityType complex type.
+ * <p>Java class for projectNameType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="cityType">
+ * &lt;complexType name="projectNameType">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}ID" />
@@ -24,10 +24,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "cityType", namespace = "http://javaops.ru", propOrder = {
+@XmlType(name = "projectNameType", namespace = "http://javaops.ru", propOrder = {
     "value"
 })
-public class CityType {
+public class ProjectNameType {
 
     @XmlValue
     protected String value;

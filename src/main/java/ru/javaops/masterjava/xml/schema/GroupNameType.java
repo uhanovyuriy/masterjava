@@ -7,12 +7,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for cityType complex type.
+ * <p>Java class for groupNameType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="cityType">
+ * &lt;complexType name="groupNameType">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}ID" />
@@ -24,10 +24,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "cityType", namespace = "http://javaops.ru", propOrder = {
+@XmlType(name = "groupNameType", namespace = "http://javaops.ru", propOrder = {
     "value"
 })
-public class CityType {
+public class GroupNameType {
 
     @XmlValue
     protected String value;
