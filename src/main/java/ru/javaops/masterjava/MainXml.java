@@ -19,6 +19,7 @@ public class MainXml {
         final Payload payload = parser.unmarshal(Resources.getResource("payload.xml").openStream());
         payload.getUsers().getUser().sort(Comparator.comparing(User::getEmail));
 
-        payload.getUsers().getUser().forEach(user -> System.out.println(user.getEmail()));
+        payload.getUsers().getUser().forEach(user -> System.out.println("fullName:" + user.getEmail() + ", email:" +
+                user.getEmail() + ", flag:" + user.getFlag() + ", city:" + user.getCity()));
     }
 }
