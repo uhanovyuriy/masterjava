@@ -2,9 +2,11 @@ package ru.javaops.masterjava.persist.dao;
 
 import com.bertoncelj.jdbi.entitymapper.EntityMapperFactory;
 import org.skife.jdbi.v2.sqlobject.*;
+import org.skife.jdbi.v2.sqlobject.customizers.BatchChunkSize;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import ru.javaops.masterjava.persist.model.User;
 
+import java.util.Iterator;
 import java.util.List;
 
 @RegisterMapperFactory(EntityMapperFactory.class)
@@ -31,7 +33,10 @@ public abstract class UserDao implements AbstractDao {
     public abstract List<User> getWithLimit(@Bind int limit);
 
     //   http://stackoverflow.com/questions/13223820/postgresql-delete-all-content
-    @SqlUpdate("TRUNCATE users")
+    @SqlUpdate("TRUNCATE users; ALTER SEQUENCE user_seq RESTART WITH 100000;")
     @Override
     public abstract void clean();
+
+    @SqlBatch("INSERT INTO users (full_name, email, flag) VALUES (:fullName, :email, CAST(:flag AS user_flag))")
+    public abstract int[] insertBatch(@BatchChunkSize int size, @BindBean Iterator<User> users);
 }
